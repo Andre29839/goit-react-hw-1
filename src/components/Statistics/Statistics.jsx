@@ -13,7 +13,7 @@ const getRandomColor = () => {
 export const Statistics = ({ title, stats }) => {
     return (
         <section className={css.statistics}>
-            <h2 className={css.title}>{ title }</h2>
+           {title && <h2 className={css.title}>{ title }</h2>} 
                 <ul className={css.stat_list} >
                 {stats.map(data => (
                     <li key={data.id} className={css.item} style={{backgroundColor: getRandomColor()}}>
@@ -28,10 +28,11 @@ export const Statistics = ({ title, stats }) => {
 
 Statistics.propsTypes = {
     title: propsTypes.string,
-    stats: propsTypes.arrayOf({
+    stats: propsTypes.arrayOf(
+        propsTypes.shape({
         id: propsTypes.string.isRequired,
         label: propsTypes.string.isRequired,
         parcentage: propsTypes.number.isRequired,
-    }
+    })
     )
 }
